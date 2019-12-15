@@ -1,0 +1,381 @@
+@import 'Flat.css';
+@import 'Equipment.css';
+@import 'Icons.css';
+
+@font-face {
+    src: url("../Rajdhani-Regular.ttf");
+}
+
+@font-face {
+    src: url("../Rajdhani-Medium.ttf");
+}
+
+@font-face {
+    src: url("../Rajdhani-Bold.ttf");
+}
+
+@font-face {
+    src: url("../Rajdhani-Light.ttf");
+}
+
+@font-face {
+    src: url("../Rajdhani-SemiBold.ttf");
+}
+
+.root{
+	/* Colours applied to special text strings */
+	text-warning: hsb(44.0, 90.0%, 68.0%);
+	text-error: hsb(4.0,100.0%, 75.0%);
+	text-notice: white;
+	quirk-bad: hsb(0.0, 64.0%, 68.0%);
+	quirk-good: hsb(125.0, 52.0%, 49.0%);
+	quirk-neutral: hsb(0, 0%, 50%);
+
+    /* LSML brand colours	*/
+	lsml-orange: hsb(28.0, 100.0%, 78.0%);	 
+	lsml-accent: hsb(28.0, 50.0%, 78.0%);
+	lsml-dark-gray: hsb(240.0, 4.0%, 20.0%);
+	lsml-light-gray: hsb(240.0, 1.0%, 85.0%);
+	
+	-fx-font-family: 'Rajdhani Medium';
+	-fx-font-smoothing-type: gray;
+	-fx-font-size: 10.0pt;
+	
+	-fx-accent: lsml-accent;	
+	-fx-focus-color: lsml-accent;
+	-fx-faint-focus-color: transparent;
+	
+	/**************************************************
+	 * The background colours used
+     **************************************************/
+	-fx-background: lsml-light-gray;
+	-fx-deep-background: derive(lsml-light-gray, -20%);
+    -fx-control-inner-background: hsb(240.0, 1.0%, 95.0%);
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background,-4.0%);
+	
+	/**************************************************
+	 * Base is the base colour that the colour of controls 
+	 * is derived from. 
+	 * 
+	 * Actual colour of controls is -fx-body-color which
+	 * can be modified based on pseudo classes but by default
+	 * taken form -fx-base.
+     **************************************************/
+	-fx-base: hsb(240.0, 4.0%, 56.0%);
+}
+
+/*
+ * Part of a hack to add tool tips on column headers. We hide the text and add a label in the graphic property with a tooltip.
+ */ 
+.table-view .column-header .label{
+    -fx-content-display: graphic-only;
+}
+
+.table-view .column-header .label .column-header-label{
+    -fx-content-display: text-only;
+}
+
+/*
+ * Text styles
+ */
+.h1{
+	-fx-font-size: 20.0pt;	
+}
+
+.h2{
+	-fx-font-size: 14.0pt;
+	/*-fx-font-weight: bold;*/
+}
+
+.h3{
+	-fx-font-size: 12.0pt;
+}
+
+.h4{
+	-fx-font-size: 8.0pt;
+}
+
+.h5{
+	-fx-font-size: 7.0pt;
+	/*-fx-font-weight: bold;*/
+}
+
+.emphasis{
+	/*-fx-font-weight: bold;*/	
+}
+
+.warning-text{
+	-fx-font-size: 12.0pt;
+	/*-fx-font-weight: bold;*/
+	-fx-text-fill: text-warning;
+}
+
+.error-text{
+	-fx-font-size: 12.0pt;
+	/*-fx-font-weight: bold;*/
+	-fx-text-fill: text-error;
+}
+
+/*
+ * Styling for Tool Tips
+ */
+.tooltip{
+	-fx-font-size: 9.0pt;
+	-fx-wrap-text: true;
+	-fx-fill: white;
+}
+
+/*
+ * Window decorations
+ */
+.decor-root{
+	-fx-padding: 1.0px;
+	-fx-background-insets: 0.0px, 1.0px;
+	-fx-background-color: hsb(0.0, 0.0%, 15.0%), -fx-background;
+}
+
+.decor-root:maximized{
+	-fx-background-insets: 0.0px;
+	-fx-padding: 0.0px;
+}
+
+.decor-button{
+	-fx-background-color: null;
+	-fx-background-radius: 0.0;
+	-fx-background-insets: 0.0;
+	-fx-padding: 0.0;
+}
+
+.decor-button:hover{
+	-fx-background: white;
+	-fx-background-color: null;
+	-fx-background-radius: 0.0;
+	-fx-background-insets: 0.0;
+	-fx-padding: 0.0;
+}
+
+.decor-close,
+.decor-max,
+.decor-iconify{ 
+	-fx-background-color: derive(-fx-background, 60.0%);
+	-fx-scale-shape: false;
+}
+
+.decor-close{
+	-fx-shape: "M 2 1 L 1 2 L 7 8 L 1 14 L 2 15 L 8 9 L 14 15 L 15 14 L 9 8 L 15 2 L 14 1 L 8 7 L 2 1 z";
+}
+
+.decor-max{
+	-fx-shape: "M 0,0 0,14 14,14 14,0 z M 1,3 13,3 13,13 1,13 z";
+}
+
+.decor-iconify{
+	-fx-shape: "M 1,13 1,1 1,13 15,13 15,15 1,15 z";
+}
+
+/*
+ * Specific Styles
+ */
+.editable-label{
+	-fx-background-color: null;
+	-fx-background-insets: 0.0; 
+	-fx-padding: 0.0 !important;
+}
+
+.editable-label:focused{
+	-fx-background-color: -fx-control-inner-background;
+}
+
+.icon-medium,
+.icon-small,
+.icon{
+	-fx-background-color: -fx-color;
+}
+
+.icon-button{
+	-fx-border-style: solid inside;
+	-fx-border-color: -fx-background;
+	-fx-border-width: 1.0px;
+	-fx-graphic-text-gap: 0.0;
+	-fx-padding: 0.0;
+	-fx-background-color: null;
+	-fx-text-base-color: -fx-text-background-color;
+}
+
+.icon-button .label{
+	-fx-padding: 0.0;
+}
+
+.icon-button:armed {
+	-fx-color: -fx-pressed-base;
+}
+
+.cell:selected .icon-button {
+	-fx-color: derive(-fx-text-background-color, -10%);
+}
+
+.icon-button:focused {
+	-fx-border-color: -fx-color;
+	-fx-border-style: dashed inside;
+	-fx-border-width: 1.0px;
+}
+
+.icon-button:hover {
+	-fx-color: -fx-hover-base;
+}
+
+.icon {
+    -fx-pref-height: 2.0em;
+    -fx-pref-width: 2.0em;
+}
+
+.icon-medium {
+	-fx-min-height: 1.6em; 
+    -fx-min-width: 1.6em;
+	-fx-pref-height: 1.6em; 
+    -fx-pref-width: 1.6em;
+	-fx-max-height: 1.6em; 
+    -fx-max-width: 1.6em;
+}
+
+.icon-small {
+	-fx-pref-height: 1.2em; 
+    -fx-pref-width: 1.2em;
+	-fx-max-height: 1.2em; 
+    -fx-max-width: 1.2em;
+}
+
+.icon-search {
+	-fx-background-color: derive(-fx-background, 40.0%);
+    -fx-pref-height: 1.5em;
+    -fx-pref-width: 1.5em;
+}
+
+
+.accent-button{
+	-fx-base: lsml-orange;	
+}
+
+.overlay{
+	-fx-background-insets: 4.0em;
+	-fx-padding: 4.0em;
+}
+
+/*
+ * Controls spacing in the UI 
+ */
+.small-spacing{
+	-fx-vgap: 0.25em;
+	-fx-hgap: 0.25em;
+	-fx-spacing: 0.25em;
+} 
+
+.default-spacing{
+	-fx-vgap: 0.3em;
+	-fx-hgap: 0.3em;
+	-fx-spacing: 0.3em;
+}
+
+.default-padding-left{
+	-fx-padding: 0.0em 0.0em 0.0em 0.4em;
+}
+
+.default-padding{
+	-fx-padding: 0.2em 0.3em 0.2em 0.2em;
+}
+
+.default-padding-main-tab{
+	-fx-padding: 0.4em 0.0 0.0 0.4em;
+}
+
+.default-padding-bottom{
+	-fx-padding: 0.0 0.0 0.2em 0.0;
+}
+
+/*
+ * Pane styles 
+ */
+.flat{
+	-fx-background-color: -fx-background;
+}
+ 
+/*
+ * The navigation block is the left hand side buttons of the main window. 
+ */
+.nav{
+    -fx-background-color: -fx-deep-background;
+}
+
+.nav .toggle-button {
+    -fx-pref-width: 12.0em;
+    -fx-alignment: center-left;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 0.0;
+    -fx-body-color: -fx-deep-background;
+    -fx-padding:  0.5em 0.0 0.5em 1.0em;
+    -fx-text-fill: derive(-fx-deep-background, -50.0%);
+}
+
+.nav .toggle-button:focused{
+    -fx-underline: true;	
+}
+
+.nav .toggle-button:selected {
+	-fx-background-color: -fx-background;
+}
+
+.nav .toggle-button:hover{
+	-fx-text-fill: derive(-fx-deep-background, 70.0%);
+}
+
+.nav .toggle-button:hover:selected{
+	-fx-body-color: -fx-background;
+	-fx-text-fill: derive(-fx-background, -50.0%);
+}
+
+.nav .toggle-button .icon {
+	-fx-background-color: -fx-text-fill;
+	-fx-pref-height: 3.0em;
+	-fx-pref-width: 3.0em;
+}
+
+/*
+ * The header is the black section shown at the top of each page.
+ */
+.header {
+	-fx-background: lsml-dark-gray;
+	-fx-background-color: -fx-background;
+	-fx-padding: 5.0px 0.3em 6.0px 1.0em;
+}
+
+.header .menu-bar{
+	-fx-base: lsml-dark-gray;
+}
+
+.header .logo{
+	-fx-background-color: lsml-orange; 
+	-fx-pref-height: 2.2em;
+	-fx-pref-width: 1.4em;
+	-fx-min-height: 2.2em;
+	-fx-min-width: 1.4em;
+	-fx-max-height: 2.2em;
+	-fx-max-width: 1.4em;
+}
+
+.header .h1,
+.header .h2{
+	-fx-padding: 0.0 0.0 0.0 1.0em;
+}
+
+.header .h1{
+	-fx-text-fill: derive(-fx-background, 60.0%);
+}
+
+/*
+ * Apply some special styling on the garage tree 
+ */
+#loadoutTree{
+	-fx-background-color: -fx-control-inner-background;
+	-fx-background-insets: 0.0; 
+ }
+ 

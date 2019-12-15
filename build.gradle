@@ -1,0 +1,145 @@
+plugins {
+    id "application"
+    id "java-library"
+    id "jacoco"
+    id "org.kordamp.gradle.jdeps" version "0.8.0"
+    id "org.beryx.jlink" version "2.12.0"
+    id "net.ltgt.apt-eclipse" version "0.21"
+    id 'com.lingocoder.mrjar' version '0.0.16'
+    id 'com.google.osdetector' version '1.6.2'
+    id 'eclipse'
+}
+
+mrjar{ 
+    main = 'org.lisoft.lsml.view_fx.LiSongMechLab'
+    moduleName = 'org.lisoft.lsml'
+    isModular = true
+    packages = ['org.lisoft.lsml.command']
+    excludes = ['xpp3','xstream', 'jna', 'dagger']
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'build/generated/sources/annotationProcessor/java/main'
+        }
+    }
+}
+
+jlink {
+    launcher {
+        name = 'org.lisoft.lsml'
+    }
+}
+
+repositories {
+	jcenter()
+}
+
+allprojects {
+	sourceCompatibility = 13.0
+	targetCompatibility = 13.0
+}
+
+/* ----------------------------------------------------------------------------
+ * General project configuration
+ * --------------------------------------------------------------------------*/
+applicationName = 'Li Song Mechlab'
+archivesBaseName = 'lsml'
+mainClassName = 'org.lisoft.lsml.view_fx.LiSongMechLab'
+version = project.getProperty('version')
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            // These cause too much noise right now
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+/* ----------------------------------------------------------------------------
+ * Dependencies
+ * --------------------------------------------------------------------------*/
+
+ext.platform = osdetector.os == 'osx' ? 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os
+
+dependencies {
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.   
+    implementation "org.openjfx:javafx-base:13:$platform"
+    implementation "org.openjfx:javafx-graphics:13:$platform"
+    implementation "org.openjfx:javafx-controls:13:$platform"
+    implementation "org.openjfx:javafx-fxml:13:$platform"
+
+    implementation "xpp3:xpp3:1.1.4c"
+
+    implementation( 'com.thoughtworks.xstream:xstream:1.4.11.1' ){ 
+        exclude module: 'xpp3_min'
+    }
+
+    implementation 'net.java.dev.jna:jna:5.5.0'
+    implementation 'com.google.dagger:dagger:2.25.2'
+
+			
+    annotationProcessor "com.google.dagger:dagger-compiler:2.25.2"
+
+    testCompile 'junit:junit:4.12+'
+    testCompile 'org.mockito:mockito-core:3.2.0'
+    testCompile 'pl.pragmatists:JUnitParams:1.1.1'
+}
+
+configurations.all {
+    exclude group:"xmlpull", module: "xmlpull"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+test{
+    jacoco{
+        excludes = ['**/view_fx/**',
+                    '**/database/gamedata/**',
+                    '**/database/gamedata/MwoDataReader**',
+                    '**/view_headless/**']
+    }	
+}
+          
+check.dependsOn jacocoTestReport
+
+jar {	
+	archiveName="lsml.jar"
+	destinationDir = file('installer/')
+	
+	// Always make fat jar
+	from { 
+		configurations.compile.collect { 
+			it.isDirectory() ? it : zipTree(it) 
+		}
+	}
+	
+	// Change the version string in the database to match the released version
+	eachFile { copyDetails ->
+        if (copyDetails.path == 'database.xml') {
+            filter { line ->
+                line.replace('(develop)', version)
+            }
+        }
+    }
+
+	manifest {
+		attributes(	'Main-Class': mainClassName, 
+					'Implementation-Title': 'Li Song Mechlab', 
+					'Implementation-Version' : version)
+	}
+}
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
