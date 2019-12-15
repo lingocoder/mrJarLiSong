@@ -1,10 +1,12 @@
 # mrJarLiSong
-The Li Song Mech Lab Project Gets mrJar-olated
+
+## The Li Song Mech Lab Project Gets mrJar-olated
 
 This project was copied from @EmilyBjoerk's [*Li Song Mech Lab*](https://github.com/EmilyBjoerk/lsml) in order to demonstrate an answer posted to a [*Stackoverflow JPMS question*]() asked by the original project's author.
 
 It demonstrates how to JPMS-enable Gradle; which lacks built-in JPMS capability. It also demonstrates the [***mrJar*** *plugin's](http://bit.ly/mrJar) *Eclipse Modulefication* feature.
 
+![*JPMS Modules Made Easy*](mr.jar.lsml.running.0.a.png)
 
 To observe how the Li Song Mech Lab project has been successfully JPMS-enabled, you could run the *`:test`* task or the *`:run`* task from the command line. Or follow these steps to build, test and run the test project in Eclipse...
 
