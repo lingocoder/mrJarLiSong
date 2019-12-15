@@ -2,9 +2,9 @@
 
 ## The Li Song Mech Lab Project Gets mrJar-olated
 
-This project was copied from @EmilyBjoerk's [*Li Song Mech Lab*](https://github.com/EmilyBjoerk/lsml) in order to demonstrate an answer posted to a [*Stackoverflow JPMS question*]() asked by the original project's author.
+This project was copied from @EmilyBjoerk's [*Li Song Mech Lab*](https://github.com/EmilyBjoerk/lsml) in order to demonstrate an answer posted to a [*Stackoverflow JPMS question*](http://bit.ly/mrJarSOA) asked by the original project's author.
 
-It demonstrates how to JPMS-enable Gradle; which lacks built-in JPMS capability. It also demonstrates the [***mrJar*** *plugin's](http://bit.ly/mrJar) *Eclipse Modulefication* feature.
+It demonstrates how to JPMS-enable Gradle; which lacks built-in JPMS capability. It also demonstrates the [***mrJar***](http://bit.ly/mrJar) plugin's *Eclipse Modulefication* feature.
 
 ![*JPMS Modules Made Easy*](mr.jar.lsml.running.0.a.png)
 
